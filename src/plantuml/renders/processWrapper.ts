@@ -31,7 +31,7 @@ export function processWrapper(process: child_process.ChildProcess, pipeFilePath
                 stdout = Buffer.from(pipeFilePath);
             }
             let stderr = Buffer.concat(buffErr, buffErrLen).toString();
-            if (stderr.indexOf('JAVA_TOOL_OPTIONS') >= 0) stderr = "";
+            if (stderr.indexOf('JAVA_TOOL_OPTIONS') >= 0 || stderr.indexOf('JAVA_OPTIONS') >= 0) stderr = "";
             if (stderr) {
                 reject(<RenderError>{ error: stderr, out: stdout });
                 return;
